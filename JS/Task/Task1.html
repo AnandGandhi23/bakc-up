@@ -1,0 +1,477 @@
+<html>
+
+<body>
+    <center>
+        <header>
+            <h2>Registration</h2>
+        </header>
+    </center>
+    <form method="POST" onsubmit="Insert(event)">
+
+        <table border="1" align="center" cellspacing="2" cellpadding="3">
+
+            <tr>
+                <td>
+                    First Name
+                </td>
+                <td>
+                    <input type="text" id="txtFirstName" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Last Name
+                </td>
+                <td>
+                    <input type="text" id="txtLastName" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Gender
+                </td>
+                <td>
+                    <input type="radio" id="radMale" name="radGender" checked><label for="radMale">Male</label>
+                    <input type="radio" id="radFemale" name="radGender"><label for="radFemale">Female</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Birthdate
+                </td>
+                <td>
+                    <input type="date" id="txtBirthdate" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Email-ID
+                </td>
+                <td>
+                    <input type="email" id="txtEmail" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Password
+                </td>
+                <td>
+                    <input type="password" id="txtPassword" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    City
+                </td>
+                <td>
+                    <input type="text" id="txtCity" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Hobbies
+                </td>
+                <td>
+                    <input type="checkbox" id="chkDance" name="hobbies" value="Dancing"><label
+                        for="chkDance">Dancing</label>
+                    <input type="checkbox" id="chkRead" name="hobbies" value="Reading"><label
+                        for="chkRead">Reading</label> <br>
+                    <input type="checkbox" id="chkWrite" name="hobbies" value="Writing"><label
+                        for="chkWrite">Writing</label>
+                    <input type="checkbox" id="chkTravell" name="hobbies" value="Travelling"><label
+                        for="chkTravell">Travelling</label>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <input type="submit" id="submit" value="Insert">
+
+                    <input type="button" id="Reset" value="Reset" onclick="ResetData();">
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <table id="tblUserData" align="center" border="1">
+            <thead>
+                <tr>
+                    <td colspan="8" align="center">
+                        Search :
+                        <input type="text" id="txtSearch" oninput="Search(this.value);">
+                    </td>
+                </tr>
+                <tr style="background: aquamarine;">
+                    <th>
+                        Full Name
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Birthdate
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        Hobbies
+                    </th>
+                    <th colspan="2">
+                        Options
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </form>
+
+    <script type="text/javascript">
+
+        var arrUser = [];
+        var flag = 0;
+        class User {
+            constructor(FirstName, LastName, Gender, Birthdate, Email, Password, City, Hobbies) {
+                this.FirstName = FirstName;
+                this.LastName = LastName;
+                this.Gender = Gender;
+                this.Birthdate = Birthdate;
+                this.Email = Email;
+                this.Password = Password;
+                this.City = City;
+                this.Hobbies = Hobbies;
+
+                this.FullName = FirstName + " " + LastName;
+            }
+        }
+
+        User.prototype.SetFullName = function(FirstName, LastName) {
+            this.FullName = FirstName + " " + LastName;
+        }
+
+        function Insert(event) {
+            event.preventDefault();
+
+            if(!validations())
+            {
+                return;
+            }
+
+            var strCheckedValue = "";
+            var checkboxes = document.getElementsByName("hobbies");
+            var checkedcheckboxes = [];
+            for(var i=0; i<checkboxes.length; i++)
+            {
+                if(checkboxes[i].checked)
+                {
+                    strCheckedValue = strCheckedValue + checkboxes[i].value + ",";
+                }
+            }
+            strCheckedValue = strCheckedValue.substring(0, strCheckedValue.length -1);
+
+            if(strCheckedValue == [])
+            {
+                alert("please choose a hobby");
+                return;                
+            }
+
+            var gender = document.getElementsByName("radGender");
+
+            var strGender = gender[0].checked ? "Male" : "Female";
+
+            var txtFirstName = document.getElementById("txtFirstName");
+            var txtLastName = document.getElementById("txtLastName");
+            var txtBirthdate = document.getElementById("txtBirthdate");
+            var txtEmail = document.getElementById("txtEmail");
+            var txtPassword = document.getElementById("txtPassword");
+            var txtCity = document.getElementById("txtCity");
+            var btnInsertUpdate = document.getElementById("submit");
+
+            if(btnInsertUpdate.value == "Insert")
+            {
+                var objUser = new User(txtFirstName.value, txtLastName.value, strGender, txtBirthdate.value, txtEmail.value, txtPassword.value, txtCity.value, strCheckedValue);
+                objUser.SetFullName(txtFirstName.value, txtLastName.value);
+                arrUser.push(objUser);
+
+                console.log(arrUser);
+                
+            }
+            else
+            {
+                console.log(flag);
+                var gender = document.getElementsByName("radGender");
+
+                var strGender = gender[0].checked ? "Male" : "Female";
+                arrUser[flag].FirstName = txtFirstName.value;
+                arrUser[flag].LastName = txtLastName.value;
+                arrUser[flag].Birthdate = txtBirthdate.value;
+                arrUser[flag].Email = txtEmail.value;
+                arrUser[flag].Password = txtPassword.value;
+                arrUser[flag].City = txtCity.value;
+                arrUser[flag].Hobbies = strCheckedValue;
+                arrUser[flag].Gender = strGender;
+
+                var objUser = arrUser[flag];
+                objUser.SetFullName(txtFirstName.value, txtLastName.value);
+
+                var btnInsertUpdate = document.getElementById("submit");
+                btnInsertUpdate.value = "Insert";  
+            }
+            txtFirstName.value = "";
+            txtLastName.value = "";
+            txtBirthdate.value = "";
+            txtEmail.value = "";
+            txtPassword.value = "";
+            txtCity.value = "";
+
+            for(var i=0; i<checkboxes.length; i++)
+            {
+                checkboxes[i].checked = false;
+            }
+            DisplayData(arrUser);
+        }
+
+        function validations()
+        {
+            var strOnlyString = /^[a-zA-Z]+$/;
+            var EmailPattern = /^([a-zA-Z0-9\.\_])+\@(([a-zA-Z\-])+\.)+([a-zA-Z{2,4}])+$/;
+
+            var txtFirstName = document.getElementById("txtFirstName");
+            var txtLastName = document.getElementById("txtLastName");
+            var txtBirthdate = document.getElementById("txtBirthdate");
+            var txtEmail = document.getElementById("txtEmail");
+            var txtPassword = document.getElementById("txtPassword");
+            var txtCity = document.getElementById("txtCity");
+            var btnInsertUpdate = document.getElementById("submit");
+
+            if(!strOnlyString.test(txtFirstName.value))
+            {
+                alert("First name should only contains characters");
+                txtFirstName.focus();
+                return false;
+            }
+            
+            if(!strOnlyString.test(txtLastName.value))
+            {
+                alert("Last name should only contains characters");
+                txtLastName.focus();
+                return false;
+            }
+
+            if(!strOnlyString.test(txtLastName.value))
+            {
+                alert("Last name should only contains characters");
+                txtLastName.focus();
+                return false;
+            }
+
+            var Birthdate = new Date(txtBirthdate.value);
+
+            if (Birthdate > new Date()) {
+                alert("Please dont select future date");
+                txtBirthdate.focus();
+                return false;
+            }
+            else {
+                var year = Birthdate.getFullYear();
+                if (new Date().getFullYear() - year < 18) {
+                    alert("Your age should be more than 18");
+                    return false;
+                }
+            }
+
+            if(!EmailPattern.test(txtEmail.value))
+            {
+                alert("Please enter a proper email");
+                txtEmail.focus();
+                return false;
+            }
+
+            if(txtPassword.value.length < 4 || txtPassword.value.length > 8)
+            {
+                alert("Password should be in between 4-8");
+                txtPassword.focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        function DisplayData(Data)
+        {
+            for(var i = 1;i<Data.length; i++)
+            {
+                for(var j = 0;j<i; j++)
+                {
+                    if(Data[i].FullName < Data[j].FullName)
+                    {
+                        var tmp = Data[i];
+                        Data[i] = Data[j];
+                        Data[j] = tmp;
+                    }
+                }
+            }
+            var strData = ``;
+
+            for(var i=0; i<Data.length; i++)
+            {
+                var element=Data[i];
+                strData += '<tr>';
+
+                strData += '<td>' + element.FullName + '</td>';
+                strData += '<td>' + element.Gender + '</td>';
+                strData += '<td>' + element.Birthdate + '</td>';
+                strData += '<td>' + element.Email + '</td>';
+                strData += '<td>' + element.City + '</td>';
+                strData += '<td>' + element.Hobbies + '</td>';
+                strData += '<td><input type="button" value="edit" onclick="UpdateRecord('+ i +');"/></td>';
+                strData += '<td><input type="button" value="delete" onclick="Delete('+ i +');"/></td>';
+                strData += '</tr>';
+            }
+
+            var tblUserData = document.getElementById("tblUserData");
+            if(strData != ``)
+                tblUserData.tBodies[0].innerHTML = strData;
+            else
+                tblUserData.tBodies[0].innerHTML = "No record found";
+        }
+
+        function Delete(ID)
+        {
+            if(confirm("Are you sure want to delete?"))
+            {
+                arrUser.splice(ID,1);
+                DisplayData(arrUser);
+            }
+        }
+
+        function UpdateRecord(i)
+        {
+            flag = i;
+            console.log(flag);
+            var txtFirstName = document.getElementById("txtFirstName");
+            var txtLastName = document.getElementById("txtLastName");
+            var txtBirthdate = document.getElementById("txtBirthdate");
+            var txtEmail = document.getElementById("txtEmail");
+            var txtPassword = document.getElementById("txtPassword");
+            var txtCity = document.getElementById("txtCity");
+            
+            var checkboxes = document.getElementsByName("hobbies");
+            var gender = document.getElementsByName("radGender");
+
+            txtFirstName.value = arrUser[i].FirstName;
+            txtLastName.value = arrUser[i].LastName;
+            txtBirthdate.value = arrUser[i].Birthdate;
+            txtEmail.value = arrUser[i].Email;
+            txtPassword.value = arrUser[i].Password;
+            txtCity.value = arrUser[i].City;
+            if(arrUser[i].Gender == "Male")
+                gender[0].checked = true
+            else
+                gender[1].checked = true;
+           
+            var hobbies = arrUser[i].Hobbies.split(",");
+
+            for(var i =0;i<checkboxes.length; i++)
+            {
+                for(var j =0; j<hobbies.length; j++)
+                {
+                    if(checkboxes[i].value == hobbies[j])
+                    {
+                        checkboxes[i].checked = true;
+                        break;
+                    }
+                    else{
+                        checkboxes[i].checked = false;
+                    }
+                }
+            }
+
+            
+            var btnInsertUpdate = document.getElementById("submit");
+            btnInsertUpdate.value = "Update";  
+        }
+
+        function Search(txtSearch)
+        {
+            var tmp = [];
+            txtSearch = txtSearch.toLowerCase();
+            console.log(txtSearch);
+            for(var i = 0;i<arrUser.length; i++)
+            {
+                var include = false;
+                if(arrUser[i].FirstName.toLowerCase().toString().includes(txtSearch))
+                {
+                    console.log(arrUser[i].FirstName.toLowerCase().toString());
+                    include = true
+                }
+                if(arrUser[i].LastName.toLowerCase().toString().includes(txtSearch))
+                {
+                    include = true
+                }
+                if(arrUser[i].Gender.toLowerCase().toString().includes(txtSearch))
+                {
+                    include = true
+                }
+                if(arrUser[i].Birthdate.toLowerCase().toString().includes(txtSearch))
+                {
+                    include = true
+                }
+                if(arrUser[i].Email.toLowerCase().toString().includes(txtSearch))
+                {
+                    include = true
+                }
+                if(arrUser[i].City.toLowerCase().toString().includes(txtSearch))
+                {
+                    include = true
+                }
+                if(arrUser[i].Hobbies.toLowerCase().toString().includes(txtSearch))
+                {
+                    include = true
+                }
+                
+                if(include)
+                {
+                    tmp.push(arrUser[i]);
+                }
+            }
+            console.log(tmp);
+            DisplayData(tmp);
+        }
+
+        function ResetData()
+        {
+            var txtFirstName = document.getElementById("txtFirstName");
+            var txtLastName = document.getElementById("txtLastName");
+            var txtBirthdate = document.getElementById("txtBirthdate");
+            var txtEmail = document.getElementById("txtEmail");
+            var txtPassword = document.getElementById("txtPassword");
+            var txtCity = document.getElementById("txtCity");
+            var checkboxes = document.getElementsByName("hobbies");
+
+            txtFirstName.value = "";
+            txtLastName.value = "";
+            txtBirthdate.value = "";
+            txtEmail.value = "";
+            txtPassword.value = "";
+            txtCity.value = "";
+
+            for(var i=0; i<checkboxes.length; i++)
+            {
+                checkboxes[i].checked = false;
+            }
+
+        }
+    </script>
+</body>
+
+</html>

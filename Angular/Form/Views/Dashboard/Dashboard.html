@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body ng-controller="dashobardController">
+    <center>
+        <div class="card" >
+            <div class="cardContainer">
+                <h2>Registration Form</h2>
+                <table class="table table-stripped">
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="txtName" name="name" ng-model="name" required />
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td>
+                            Email
+                        </td>
+                        <td>
+                            <input type="email" class="form-control" name="email" ng-model="email" required />
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td>
+                            Gender
+                        </td>
+                        <td>
+                            <input type="radio" id="radMale" name="Gender" ng-model="radMale" checked />&nbsp;<label
+                                style="font-weight: normal;" for="radMale">Male</label>
+                            <input type="radio" id="radFemale" name="Gender" ng-model="radFemale" />&nbsp;<label
+                                style="font-weight: normal;" for="radFemale">Female</label>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td>
+                            Username
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="username" ng-model="username" required />
+        
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td>
+                            Password
+                        </td>
+                        <td>
+                            <input type="password" class="form-control" name="password" ng-model="password" required />
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td>
+                            Department
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="department" ng-model="department" required />
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" class="btn btn-outline-primary" ng-disabled="myForm.$invalid"
+                                ng-click="addData()" value="Submit" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="container">
+            <table width="70%" id="tblDisplayData" class="table table-stripped">
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Options
+                    </th>
+                </tr>
+                <tr ng-repeat="item in data">
+                    <td><img src="{{item.ProfilePic}}" height="50px" width="50px"></td>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Email}}</td>
+                    <td>{{item.Gender}}</td>
+                    <td>
+                        <button ng-click="updateData(item._id)" value="Update" class="btn btn-primary">Update</button>
+                        <button ng-click="deleteData(item._id)" value="Delete" class="btn btn-primary">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </center>
+</body>
+</html>

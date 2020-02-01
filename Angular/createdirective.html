@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body ng-app="myapp" ng-controller="myctrl">
+    <div>
+        <label>What is your twitter handle?</label>
+        <input type="text" ng-model="handle">
+    </div>
+    <hr>
+    <div ng-if="handle.length !== 5">
+        {{handle}}
+    </div>
+
+    <div ng-Dir="" ng-style="{'background-color' : myStyle}" style="width: 100px; height: 100px;"></div>
+    {{myStyle}}
+    <div>
+        <input type="button" value="My button" ng-mouserover="">
+    </div>
+    <br>
+
+    <div ng-repeat="x in names">
+        {{x.Username}}
+    </div>
+
+    <ng-Dir></ng-Dir>
+    <div ng-guru="">Click Me</div>
+
+    <script>
+        var app = angular.module("myapp", []);
+
+        app.controller("myctrl", ["$scope","$http", function ($scope, $http) {
+            $scope.myStyle = "red";
+
+            $http.get("http://localhost:3000/manager/listagent")
+                .then(function (result) {
+                    $scope.names = request.responseText;
+                },
+                function (err) {
+                    console.log("error occured " + err);
+                })
+
+            // var request = new XMLHttpRequest();
+            // request.onreadystatechange = function () {
+
+            //     if (request.readyState == 4 && request.status == 200) {
+            //         console.log(request.responseText)
+            //         $scope.names = request.responseText;
+            //     }
+            // }
+
+            // request.open("GET", "http://localhost:3000/manager/listagent", true);
+            // request.send();
+        }])
+
+        app.directive("ngDir", function () {
+            return {
+
+                link: function ($scope, element, attrs) {
+                    element.on("mouseenter", function () {
+                        $scope.$apply(function () {
+                            $scope.myStyle = "yellow"
+                        })
+                    })
+
+                    element.on("mouseleave", function () {
+                        $scope.$apply(function () {
+                            $scope.myStyle = "red"
+                        })
+                    })
+
+                    element.bind("click", () => {
+                        alert("clicked");
+                    })
+                }
+            }
+        })
+
+        app.directive('ngGuru', function () {
+            return {
+                link: function ($scope, element, attrs) {
+                    element.on('mouseenter', function () {
+                        element.html('You clicked me');
+                    });
+                }
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

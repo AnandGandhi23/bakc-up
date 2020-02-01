@@ -1,0 +1,44 @@
+<html>
+    <script type="text/javascript">
+        class Person
+        {
+            constructor(name, age, birthdate)
+            {
+                this.name = name;
+                this.age = age;
+                this.birthdate = birthdate;
+            }
+
+            print()
+            {
+                return "hello " + this.name;
+            }
+        }
+
+
+    </script>
+
+    <body>
+        <input type="text" placeholder="Name" id="txtName">
+        <br>
+        <input type="number" placeholder="Age" id="txtAge">
+        <br>
+        <input type="date" placeholder="Birthdate" id="txtBirthdate">
+        <br>
+        
+        <input type="button" value="click me" onclick="CallClass()">
+        <br>
+        <p id="demo"></p>
+        <script>
+            function CallClass()
+            {
+                var txtName = document.getElementById("txtName");
+                var txtAge = document.getElementById("txtAge");
+                var txtBirthdate = document.getElementById("txtBirthdate");
+                var objPerson = new Person(txtName.value, txtAge.value, txtBirthdate.value);
+
+                document.getElementById("demo").innerHTML = objPerson.print();
+            }
+        </script>
+    </body> 
+</html>

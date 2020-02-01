@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+
+        function fadein() {
+            var image = document.getElementById("img");
+            console.log(image.style.opacity);
+
+            image.style.opacity -= 0.10;
+
+            if (image.style.opacity > 0) {
+                setTimeout(() => {
+                    fadein();
+                }, 500);
+            }
+            else{
+                alert("hbjhbkj");
+                return;
+            }
+        }
+
+        function fadeout() {
+            var image = document.getElementById("img");
+            console.log(image.style.opacity);
+
+            image.style.opacity = image.style.opacity + 0.10;
+            
+            if (image.style.opacity < 1) {
+                setTimeout(() => {
+                    fadeout();
+                }, 500);
+            }
+            else{
+                alert("hbjhbkj");
+                return;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <img id="img" style="opacity: 1;" src="D:\Divyang\js\janak\img\3.jpg" height="200" width="200">
+    <br>
+    <button onclick="fadein()">Fade in</button>
+    <button onclick="fadeout()">Fade out</button>
+</body>
+
+</html>

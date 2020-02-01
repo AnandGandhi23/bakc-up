@@ -1,0 +1,61 @@
+<html>
+
+<body>
+    <script type="text/javascript">
+        var presentArray = [4, 3, 2];
+        var counter = 0;
+        var selectedArray = [];
+        var f = 0;
+        numOfDay();
+        function numOfDay() {
+            // var flag=0;
+            f= 0;
+            if (presentArray[0] > presentArray[1]) {
+                selectedArray.push(0);
+            }
+            else {
+                selectedArray.push(1);
+            }
+            if (presentArray[1] > presentArray[2]) {
+                if (presentArray.indexOf(1) != "-1") {
+                    if (presentArray[0] > presentArray[2]) {
+                        selectedArray.push(0);
+                    }
+                    else {
+                        selectedArray.push(2);
+                    }
+                }
+                else {
+                    selectedArray.push(1);
+                }
+            }
+            else {
+                selectedArray.push(2);
+            }
+            console.log(selectedArray);
+            for (var i = 0; i < selectedArray.length; i++) {
+                presentArray[selectedArray[i]] = presentArray[selectedArray[i]] - 1;
+            }
+            counter++;
+            for (var j = 0; j < presentArray.length; j++) {
+                if (presentArray[j] == 0) {
+                    f++;
+                }
+            }
+            console.log(presentArray);
+            selectedArray = [];
+            if (f >= 2) {
+                alert(counter);
+                return;
+            }
+            else {
+                numOfDay();
+            }
+            
+            //document.write(counter);
+        }
+
+    </script>
+</body>
+
+</html>

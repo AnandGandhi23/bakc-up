@@ -1,0 +1,32 @@
+<html>
+    <body>
+        <p id="array"></p>
+        <input type="text" placeholder="enter a value to add" id="txtData" />
+        <br>
+        <br>
+        <input type="button" value="add" onclick="javascript: addArray()">
+
+        <script type="text/javascript">
+            var arrstring = ['anand', 'abc', '12'];
+            showData();
+
+            function addArray() {
+                var data = document.getElementById("txtData").value;
+
+                if(!arrstring.includes(data))
+                {
+                    arrstring.push(data);
+                    showData();
+                }
+                else{
+                    arrstring.splice(arrstring.indexOf(data), 1);
+                    showData();
+                }
+            }
+
+            function showData() {
+                document.getElementById("array").innerHTML = arrstring;
+            }
+        </script>
+    </body>
+</html>

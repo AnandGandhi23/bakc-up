@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <script type="text/javascript">
+        function excep()
+        {        
+            var a = 10; 
+            var b = 0;
+            try
+            {
+                if(b == 0)
+                {
+                    throw new exception("divide by zero error");
+                }
+                else
+                {
+                    var c = a / b;
+                }
+            }
+            catch(e)
+            {
+                alert(e);
+            }
+            finally{
+                alert("finally block");
+            }
+        }
+        </script>
+    </head>
+    <body>
+        <input type="button" value="click me" onclick="excep();"> 
+    </body>
+</html>

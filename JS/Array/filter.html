@@ -1,0 +1,22 @@
+<html>
+    <body>
+        Minimum Age : <input type="text" placeholder="minimum Age" id="txtAge">
+        <br>
+        <br>
+        <input type="button" value="click" onclick="checkAge();">
+        &nbsp;&nbsp;&nbsp;
+        <p id= "demo"></p> 
+    </body>
+    <script type="text/javascript">
+        var arrAges = [18, 4, 6, 19, 21];
+
+        findFunction = (arrAge) =>
+        {
+            return arrAge > document.getElementById("txtAge").value
+        }   
+        
+        function checkAge() {
+            document.getElementById("demo").innerHTML = arrAges.filter(findFunction);
+        }
+    </script>
+</html>

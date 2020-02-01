@@ -1,0 +1,51 @@
+<html>
+    <script type="text/javascript">
+        var promise;
+        new Promise(function(resolve, reject)
+        {
+            setTimeout(()=> resolve(1), 1000);
+        }).then(function(result){
+            
+            alert(result);
+            return result * 2;    
+            
+        }).then((result) =>
+        {
+            alert(result);
+            return result * 2;
+        }).then((result) =>
+        {
+            alert(result);
+            return result * 2;
+        }).then(() => 
+        {
+            job1();
+        })
+
+        function job1()
+        {
+            return new Promise((resolve, reject) => 
+            {
+                setTimeout(() => {
+                    resolve('result of job1');
+                }, 1000);
+            })
+            .then((data1) => {
+                alert(data1);
+                return job2();
+            }).then((data2) => {
+                alert(data2);
+            });
+        }
+
+        function job2()
+        {
+            return new Promise((resolve, reject) => 
+            {
+                setTimeout(() => {
+                    resolve('result of job2');
+                }, 1000);
+            });
+        }
+    </script>
+</html>

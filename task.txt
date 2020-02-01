@@ -1,0 +1,10 @@
+Date: 31-01-2020
+Time: 8 hr
+
+Subject: AngularJS
+- watched videos on AngularJS
+- form css
+- Form validarion
+- CRUD operations
+- Routing with ngRoute 
+

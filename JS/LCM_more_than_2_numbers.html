@@ -1,0 +1,26 @@
+<html>
+    <script type="text/javascript">
+        var arrNumbers = [44, 64, 12, 17, 65];
+        var minValue;
+        var maxValue;
+        var lcm = 0;
+
+        for(var i = 0; i<arrNumbers.length-1; i++)
+        {
+            minValue = Math.min(arrNumbers[i], arrNumbers[i+1]);
+            maxValue = Math.max(arrNumbers[i], arrNumbers[i+1]);
+            lcm = maxValue;
+            console.log(minValue);
+            console.log(maxValue);
+            console.log(lcm);
+            while(lcm % minValue !== 0)
+            {
+                lcm += maxValue;
+            }
+
+            arrNumbers[i+1] = lcm;
+        }
+
+        alert("LCM is =" + lcm);
+    </script>
+</html>

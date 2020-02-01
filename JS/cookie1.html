@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <input type="text" placeholder="Name" id="txtName">
+        <br>
+        <input type="button" onclick="javascript: redirect();" value="click to redirect">
+
+        <script>
+            function redirect()
+            {
+                var name = document.getElementById("txtName").value;
+                if(name == "")
+                {
+                    alert("enter name:");
+                    document.getElementById("txtName").focus();
+                    return;
+                }
+                document.cookie = "Password=" + "anand";
+                document.cookie = "Username=" + name;
+                
+                console.log(name);
+                return;
+                window.location = "file:///D:/Anand/JS/read_cookie.html";
+            }
+        </script>
+    </body>
+</html>

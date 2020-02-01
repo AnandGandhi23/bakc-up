@@ -1,0 +1,281 @@
+<html>
+
+<body>
+    <form method="POST" onsubmit="Insert(event)">
+        <center>
+            <table border="1" cellspacing="2" cellpadding="3">
+                <tr>
+                    <td>
+                        Name :
+                    </td>
+                    <td>
+                        <input type="text" id="txtName" placeholder="Name" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Birthdate :
+                    </td>
+                    <td>
+                        <input type="date" id="txtBirthdate" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Type :
+                    </td>
+                    <td>
+                        <input type="checkbox" id="chkBatsman" name="chkType" value="Batsman"><label
+                            for="chkBatsman">Batsman</label>
+                        <input type="checkbox" id="chkBowler" name="chkType" value="Bowler"><label
+                            for="chkBowler">Bowler</label>
+                    </td>
+                </tr>
+                <tr style="display: none;" id="trBattingHand">
+                    <td>
+                        Batsman Hand :
+                    </td>
+                    <td>
+                        <input type="text" id="txtBattingHand">
+                    </td>
+                </tr>
+                <tr style="display: none;" id="trBowlingHand">
+                    <td>
+                        Bowler Hand :
+                    </td>
+                    <td>
+                        <input type="text" id="txtBowlingHand">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Insert">
+                    </td>
+                </tr>
+            </table>
+
+            <table id="tblData" border="1" cellspacing="2" cellpadding="3">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Birthdate
+                        </th>
+                        <th>
+                            Type
+                        </th>
+                        <th>
+                            Batsman hand
+                        </th>
+                        <th>
+                            Bowler hand
+                        </th>
+                        <th colspan="2">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </center>
+    </form>
+    <script type="text/javascript">
+        var chkBatsman = document.getElementById("chkBatsman");
+        chkBatsman.addEventListener("click", HideShowBatsman);
+
+        var chkBowler = document.getElementById("chkBowler");
+        chkBowler.addEventListener("click", HideShowBowler);
+
+        var objP1 = {
+            Id: 0,
+            Name: "anand",
+            Birthdate: "1997-03-23",
+            Type: "Batsman,Bowler",
+            BattingHand: "right",
+            BowlingHand: "Left"
+        }
+        var objP2 = {
+            Id: 1,
+            Name: "anihsa",
+            Birthdate: "1997-03-23",
+            Type: "Batsman",
+            BattingHand: "right",
+            BowlingHand: ""
+        }
+        var Records = new Map();
+        Records.set(0, objP1);
+        Records.set(1, objP2);
+        ShowRecords(Records);
+        var id = 2;
+
+        function HideShowBatsman() {
+            var trBattingHand = document.getElementById("trBattingHand");
+            if (trBattingHand.style.display == "none") {
+                trBattingHand.style.display = "table-row";
+            }
+            else {
+                trBattingHand.style.display = "none";
+            }
+        }
+
+        function HideShowBowler() {
+            var trBowlingHand = document.getElementById("trBowlingHand");
+            if (trBowlingHand.style.display == "none") {
+                trBowlingHand.style.display = "table-row";
+            }
+            else {
+                trBowlingHand.style.display = "none";
+            }
+        }
+        class Player {
+            constructor(id, name, birthdate, type, battingHand, bowlingHand) {
+                this.Id = id;
+                this.Name = name;
+                this.Birthdate = birthdate;
+                this.Type = type;
+                this.BattingHand = battingHand;
+                this.BowlingHand = bowlingHand;
+            }
+        }
+
+        function Insert(event) {
+            event.preventDefault();
+            var txtName = document.getElementById("txtName");
+            var txtBirthdate = document.getElementById("txtBirthdate");
+            var chkType = document.getElementsByName("chkType");
+            var txtBattingHand = document.getElementById("txtBattingHand");
+            var txtBowlingHand = document.getElementById("txtBowlingHand");
+
+            var Birthdate = new Date(txtBirthdate.value);
+
+            if (Birthdate > new Date()) {
+                alert("Please dont select future date");
+                txtBirthdate.focus();
+                return;
+            }
+            else {
+                var year = Birthdate.getFullYear();
+                if (new Date().getFullYear() - year < 18) {
+                    alert("Age should be more than 18");
+                    return;
+                }
+            }
+            var strType = "";
+            for (var i = 0; i < chkType.length; i++) {
+                var element = chkType[i];
+                if (element.checked) {
+                    strType += element.value + ",";
+
+                    if (element.value == "Batsman") {
+                        if (txtBattingHand.value == "") {
+                            txtBattingHand.style.borderColor = "red";
+                            txtBattingHand.focus();
+                            return;
+                        }
+                        else {
+                            txtBattingHand.style.borderColor = "white";
+                        }
+                    }
+
+                    if (element.value == "Bowler") {
+                        if (txtBowlingHand.value == "") {
+                            txtBowlingHand.style.borderColor = "red";
+                            txtBowlingHand.focus();
+                            return;
+                        }
+                        else {
+                            txtBowlingHand.style.borderColor = "white";
+                        }
+                    }
+                }
+            }
+
+            strType = strType.substring(0, strType.length - 1);
+
+            var objPlayer = new Player(id, txtName.value, txtBirthdate.value, strType, txtBattingHand.value, txtBowlingHand.value);
+
+            Records.set(id, objPlayer);
+            console.log(Records);
+            id++;
+            txtName.value = "";
+            txtBirthdate.value = "";
+            txtBattingHand.value = "";
+            txtBowlingHand.value = "";
+            chkType.checked = false;
+            ShowRecords(Records);
+        }
+
+        function ShowRecords(mapRecord) {
+            let str = ``;
+            for (var [item, value] of mapRecord) {
+                str += `<tr>`;
+                str += `<td> ` + value.Name + ` </td>`;
+                str += `<td> ` + value.Birthdate + ` </td>`;
+                str += `<td> ` + value.Type + ` </td>`;
+                str += `<td> ` + value.BattingHand + ` </td>`;
+                str += `<td> ` + value.BowlingHand + ` </td>`;
+                str += `<td><input type="button" value="Update" onclick="Update(` + value.Id + `)"></td>`;
+                str += `<td><input type="button" value="Delete" onclick="Delete(` + value.Id + `)"></td>`;
+                str += `</tr>`;
+            }
+
+            var tblData = document.getElementById("tblData");
+            tblData.tBodies[0].innerHTML = str;
+        }
+
+        function Delete(DeleteID) {
+            if (!confirm("Are you sure want to delete?")) {
+                return;
+            }
+
+            if (Records.delete(DeleteID)) {
+                ShowRecords(Records);
+            }
+            else {
+                alert("Key not found");
+                return;
+            }
+        }
+
+        function Update(UpdateID) {
+            var objPerson = Records.get(UpdateID);
+            console.log(UpdateID);
+            console.log(objPerson);
+
+            var txtName = document.getElementById("txtName");
+            var txtBirthdate = document.getElementById("txtBirthdate");
+            var chkType = document.getElementsByName("chkType");
+            var txtBattingHand = document.getElementById("txtBattingHand");
+            var txtBowlingHand = document.getElementById("txtBowlingHand");
+
+            txtName.value = objPerson.Name;
+            txtBirthdate.value = objPerson.Birthdate;
+            txtBattingHand.value = objPerson.BattingHand;
+            txtBowlingHand.value = objPerson.BowlingHand;
+
+            var Type = objPerson.Type.split(",")
+            for(var i = 0; i< chkType.length; i++)
+            {
+                for(var j = 0; j< Type.length; j++)
+                {
+                    if(chkType[i].value == Type[j])
+                    {
+                        chkType[i].checked = true;
+                        break;
+                    }
+                    else
+                    {
+                        chkType[i].checked = false;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

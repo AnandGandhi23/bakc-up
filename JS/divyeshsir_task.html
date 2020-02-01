@@ -1,0 +1,120 @@
+<html>
+    <body>
+        <p id="array"></p>
+        <div id="divInput">
+            Number of elements : 
+            <input type="text" id="txtNumber"> &nbsp;
+            &nbsp;
+            <input type="button" value="Enter" onclick="takeInput()" >
+            
+            <div id="inner_input">
+                <p id="input"></p>
+                <input type="button" value="Add" onclick="add()">
+            </div>
+            
+        </div>
+        <div id="divSort">
+            <input type="button" value="Sort" onclick="sort()">
+        </div>
+
+        <script type="text/javascript">
+            var arrParent = [];
+            var arrChild = [];
+            var parent_n = prompt("Enter number of parent element!!", "Enter a number");
+            var parent_counter = 0;
+            var child_number;
+
+            function takeInput() 
+            {
+                document.getElementById("inner_input").style.display = "block";
+                child_number = document.getElementById("txtNumber").value;
+                
+                
+                if(child_number <= 0 || child_number=="")
+                {
+                    alert("enter a numbeer");
+                    return;
+                }
+
+                let str = "";
+
+                for(let i = 0; i< child_number; i++)
+                {
+                    str += `element `+ i +` <input type="text" id="`+ i +`"/></br>`
+                }
+                parent_counter ++;
+                document.getElementById("input").innerHTML = str;
+            }
+
+            function add() 
+            {
+                arrChild = [];
+                for(var i = 0;i < child_number; i++)
+                {
+                    arrChild.push(document.getElementById(i).value);
+                    document.getElementById("txtNumber").value = "";
+                    document.getElementById("inner_input").style.display = "none";
+                }
+
+                arrParent.push(arrChild);
+                console.log(arrParent);
+                showArray();
+
+                if(parent_counter >= parent_n)
+                {
+                    document.getElementById("divInput").style.display = "none";
+                    return ;
+                }
+            }
+
+            function sort() 
+            {
+                for(var i =0; i< arrParent.length; i++)
+                {
+                    arrChild = arrParent[i];
+                    console.log(arrChild);
+
+                    if(!isNaN(arrChild[i]))
+                    {
+                        arrChild.sort((a,b) => {return a-b});
+                    }
+                    else{
+                        arrChild.sort();
+                    }
+                }
+
+                for(var i = 1; i<arrParent.length; i++)
+                {
+                    for (var j = 0; j < i; j++)
+                    {
+                        if (arrParent[i].length < arrParent[j].length) {
+                        var tmp = arrParent[i];
+                        arrParent[i] = arrParent[j];
+                        arrParent[j] = tmp;
+                        }   
+                    }
+                }
+                showArray();
+            }
+
+            function showArray() {
+                var str = "";
+                var arr = [];
+                for(var i =0; i < arrParent.length; i++)
+                {
+                    arr = [];
+                    arr = arrParent[i];
+                    str += `[ `;
+                    for(var j = 0; j< arr.length; j++)
+                    {
+                        str += arr[j] + ` `;
+                    }
+                    str += `] `;
+                }
+
+                document.getElementById("array").innerHTML = str;
+            }
+        </script>
+    </body>
+
+</html>

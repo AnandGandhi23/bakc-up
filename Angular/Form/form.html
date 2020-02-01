@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./Styles/myStyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <script src="./controller.js"></script>
+    <script src="./Service/serviceGetAllData.js"></script>
+    <script src="./Views/Dashboard/DashboardController.js"></script>
+    <script src="./Views/AllRecords/AllRecordsController.js"></script>
+</head>
+
+<body >
+    <ul>
+        <li><a href="#!home">Home</a></li>
+        <li><a href="#!showAll">Show All Records</a></li>
+    </ul>
+
+    <ng-view></ng-view>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<html>
+    <script type="text/javascript">
+        async function f() {
+            let promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Done");
+                }, 100); 
+            });
+            let result = await promise;
+                alert(result);
+        }
+
+        f();
+    </script>
+</html>

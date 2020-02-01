@@ -1,0 +1,25 @@
+<html>
+    <body>
+        <p id="stringData"></p>
+        <p id="numericData"></p>
+
+        <input type="button" onclick="javascript:sort();" value="sort data">
+
+        <p id="stringSortData"></p>
+        
+        <p id="numericSortData"></p>
+
+        <script type="text/javascript">
+            var arrString = ['apple', 'orange', 'banana', 'custard apple'];
+            var arrNumeric = [4, 12,100 ,20,150, 13];
+
+            document.getElementById("stringData").innerHTML = arrString ;
+            document.getElementById("numericData").innerHTML = arrNumeric ;
+
+            function sort() {
+                document.getElementById("stringSortData").innerHTML = arrString.sort();
+                document.getElementById("numericSortData").innerHTML = arrNumeric.sort((a,b) => {return a-b});
+            }
+        </script>
+    </body>
+</html>

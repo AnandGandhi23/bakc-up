@@ -1,0 +1,229 @@
+<html>
+
+<head>
+    <style>
+        #tblGame td {
+            height: 70px;
+            width: 70px;
+            background: #333;
+            font-size: 50px;
+            color: honeydew;
+            margin: 10px;
+            text-align: center;
+        }
+
+        #box {
+            width: fit-content;
+            overflow: auto;
+            margin: 40px auto;
+            background: #666;
+            border-radius: 10px;
+        }
+
+        #tblGame td:hover {
+            background: #000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <center>
+            <h2 style="align-self: center; color: blanchedalmond;">Tic Tac Toe</h2>
+        </center>
+        <table id="tblGame" style="margin: 30px;" border="1">
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        var number = prompt("Enter your choice!", "Enter a number");
+
+        if(number <= 2)
+        {
+            alert("Invalid choice");
+            number = 0;
+        }
+        var str = "";
+        for (var i = 1; i <= number; i++) {
+            str += '<tr>';
+            for (var j = 1; j <= number; j++) {
+                str += '<td id= "' + i + j + '" onclick="javascript:movement(' + i + j + ');"></td>';
+            }
+            str += '</tr>'
+        }
+
+        var tblGame = document.getElementById("tblGame");
+        tblGame.tBodies[0].innerHTML = str;
+
+        var turn = 0;
+
+        function movement(id) {
+            console.log(id);
+            var td = document.getElementById(id);
+            if (td.innerText == "") {
+                if (turn % 2 == 0) {
+                    td.innerText = "O";
+                    turn++;
+                }
+                else {
+                    td.innerText = "X";
+                    turn++;
+                }
+            }
+
+            
+            winner();
+        }
+
+        function winner() {
+            vertical();
+
+            horizontal();
+
+            right_cross();
+
+            left_cross();
+        }
+
+        function vertical() {
+            var O_counter = 0;
+            var X_counter = 0;
+
+            for (var i = 1; i <= number; i++) {
+                for (var j = 1; j <= number; j++) {
+                    var td = document.getElementById(j.toString() + i.toString());
+                    if (td.innerText == "O") {
+                        O_counter++;
+                    }
+                    if (td.innerText == "X") {
+                        X_counter++;
+                    }
+                }
+
+                if (O_counter == number) {
+                    alert("O is winner");
+                    clear();
+                    return;
+                }
+
+                if (X_counter == number) {
+                    alert("X is winner");
+                    clear();
+                    return;
+                }
+
+                O_counter = 0;
+                X_counter = 0;
+            }
+        }
+
+        function horizontal() {
+            var O_counter = 0;
+            var X_counter = 0;
+
+            for (var i = 1; i <= number; i++) {
+                for (var j = 1; j <= number; j++) {
+                    var td = document.getElementById(i.toString() + j.toString());
+                    if (td.innerText == "O") {
+                        O_counter++;
+                    }
+                    if (td.innerText == "X") {
+                        X_counter++;
+                    }
+                }
+
+                if (O_counter == number) {
+                    alert("O is winner");
+                    clear();
+                    return;
+                }
+
+                if (X_counter == number) {
+                    alert("X is winner");
+                    clear();
+                    return;
+                }
+
+                O_counter = 0;
+                X_counter = 0;
+            }
+        }
+
+        function right_cross() {
+            var O_counter = 0;
+            var X_counter = 0;
+
+            for (var i = 1; i <= number; i++) 
+            {
+                var td = document.getElementById(i.toString() + i.toString());
+                if (td.innerText == "O") {
+                    O_counter++;
+                }
+                if (td.innerText == "X") {
+                    X_counter++;
+                }
+            }
+
+            if (O_counter == number) {
+                alert("O is winner");
+                clear();
+                return;
+            }
+
+            if (X_counter == number) {
+                alert("X is winner");
+                clear();
+                return;
+            }
+        }
+
+        function left_cross()
+        {
+            var O_counter = 0;
+            var X_counter = 0;
+
+            var j = number;
+            for (var i = 1; i <= number; i++) 
+            {
+                var td = document.getElementById(i.toString() + j.toString());
+                if (td.innerText == "O") {
+                    O_counter++;
+                }
+                if (td.innerText == "X") {
+                    X_counter++;
+                }
+
+                j--;
+            }
+
+            if (O_counter == number) {
+                alert("O is winner");
+                clear();
+                return;
+            }
+
+            if (X_counter == number) {
+                alert("X is winner");
+                clear();
+                return;
+            }
+        }
+
+        function clear()
+        {
+            for(var i = 1; i <= number; i++)
+            {
+                for(var j = 1; j<= number; j++)
+                {
+                    var td = document.getElementById(i.toString() + j.toString());
+                    td.innerText = "";
+                    turn = 0;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

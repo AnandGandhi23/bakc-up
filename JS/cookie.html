@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            function setCookie()
+            {
+                if( document.myform.txtname.value == "" )
+                {
+                    alert("Enter some value!");
+                    document.myform.txtname.focus();
+                    return;
+                }
+                cookievalue = escape(document.myform.txtname.value) + ";";
+                document.cookie = "name=" + cookievalue;
+                alert("Setting Cookies : " + "name=" + cookievalue );
+            }
+
+            function readCookie()
+            {
+                var allcookies = document.cookie;
+                document.write("All cookies - " + allcookies);
+                cookiearray = allcookies.split(";");
+
+                for(var i=0; i<cookiearray.length; i++) {
+                  name = cookiearray[i].split('=')[0];
+                  value = cookiearray[i].split('=')[1];
+                  document.write ("Key is : " + name + " and Value is : " + value);
+               }
+            }
+        </script>
+    </head>
+    <body>
+        <form name="myform">
+
+            Enter Name : <input type="text" name="txtname"/>
+
+            <input type="button" value="Click to set cookie" onclick="setCookie()"/>
+            <br/>
+            <input type="button" value="Read cookie" onclick="readCookie()">
+        </form>
+    </body>
+</html>

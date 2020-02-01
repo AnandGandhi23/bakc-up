@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            function alertdialog()
+            {
+                alert("This is alert dialog");
+            }
+
+            function confirmdialog()
+            {
+                if(confirm("this is comfirmation!!!"))
+                {
+                    alert("Thank you");
+                }
+            }
+
+            function promptdialog()
+            {
+                var value = prompt("Enter your name", "Your name here");
+                alert("You have entered - " + value);
+            }
+        </script>
+    </head>
+    <body>
+        <input type="button" value="alert dialog" onclick="alertdialog()">
+        <br>
+        <input type="button" value="confirmation dialog" onclick="confirmdialog()">
+        <br>
+        <input type="button" value="prompt dialog" onclick="promptdialog()">
+        <br>
+        
+    </body>
+</html>

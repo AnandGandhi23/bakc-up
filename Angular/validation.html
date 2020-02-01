@@ -1,0 +1,47 @@
+<html>
+    <style>
+        input.ng-invalid{
+            background-color: hotpink;
+        }
+    </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js">
+        </script>
+    <body ng-app="app" ng-controller="myctrl">
+        <form name="myform"> 
+            <h1 ng-click="changename()" >{{firstname | uppercase}}</h1>
+            Email : 
+            <input type="email" name="myemail" ng-model="email">
+            <span ng-show="myform.myemail.$error.email"> Not a valid email</span>
+
+            <h1>Status</h1>
+            {{myform.myemail.$valid}}
+            {{myform.myemail.$dirty}}
+            {{myform.myemail.$touched}}
+
+            <br>
+            <br>
+
+            <input type="text" name="myemail" ng-model="text">
+            <ul>
+                <li ng-repeat="x in names">
+                    {{x | myfilter}}
+                </li>
+            </ul>
+
+            <table>
+                <tr>
+                    <th>
+                        <h1 ng-click="sort()">Name</h1>
+                    </th>
+                </tr>
+                <tr ng-repeat="x in names | orderBy : myOrder">
+                    <td>{{x}}</td>
+                </tr>
+            </table>
+        </form>
+        <script>
+        </script>
+
+        <script src="./controller.js"></script>
+    </body>
+</html>

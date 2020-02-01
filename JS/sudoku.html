@@ -1,0 +1,64 @@
+<html>
+
+<body>
+    <script type="text/javascript">
+        var arrSudoku = [
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+        ];
+        console.log(arrSudoku[0][0]);
+        document.write("<table id='tblSudoku' border=1 border-color=green height=50px style='width:20px;border-color: crimson;'>");
+
+        for (var i = 1; i <= 9; i++) 
+        {
+            document.write("<tr id='tr" + i + "'>");
+            if ((i + 1) % 3 == 0) {
+                document.getElementById("tr" + i).style.borderBottomStyle = "100px";
+                document.getElementById("tr" + i).style.borderWidth = "15";
+                document.getElementById("tr" + i).style.borderColor = "blue";
+            }
+
+            for (var j = 0; j < 9; j++) {
+                document.write("<td id='td" + i + j + "'>");
+                if ((j + 1) % 3 == 0) {
+                    document.getElementById("td" + i + j).style.borderBottomStyle = "100px";
+                    document.getElementById("td" + i + j).style.borderColor = "blue";
+                }
+                if (arrSudoku[i][j] == 0) {
+                    document.write("<input type='text' id='" + i + j + "' style='height: 50px; width: 50px;'/>");
+                } else {
+                    document.write("<input type='text' id='" + i + j + "' style='height: 50px; width: 50px;' readonly='true' value='" + arrSudoku[i][j] + "'/>");
+                }
+                document.write("</td>");
+            }
+            document.write("</tr>");
+        }
+
+        document.write("</table>");
+
+        function check() {
+            for (var i = 0; i < 9; i++) {
+                for (var j = 0; j < 9; j++) {
+                    console.log(i + "" + j);
+                    // arrSudoku[i][j] = document.getElementById("11").value;
+
+                    arrSudoku[i][j] = document.getElementById(i + "" + j).value;
+                }
+                ConsolE.log(i);
+            }
+
+            console.log(arrSudoku);
+        }
+    </script>
+
+    <button id="btnCheck" onclick="check()">Check Ans</button>
+</body>
+
+</html>

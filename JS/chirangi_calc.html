@@ -1,0 +1,226 @@
+<html>
+
+<body>
+    <script type="text/javascript">
+        var n1 = 0;
+        // var n2=0;
+        var old_op = "", exp = '';
+        function showButtonValue(btn) {
+            document.getElementById('txtAns').value += btn.innerText;
+        }
+        function showScientificTable() {
+            document.getElementById('tblSci').style.visibility = 'visible';
+        }
+        function CE() {
+            document.getElementById('txtAns').value = '';
+        }
+        function backspace() {
+            var txtData = document.getElementById('txtAns');
+            exp = txtData.value;
+            exp = exp.substring(0, exp.length - 1);
+            txtData.value = exp;
+        }
+        function sinData() {
+            var txtSinData = document.getElementById('txtAns');
+            exp = Math.sin(txtSinData.value);
+            txtSinData.value = exp;
+        }
+        function cosData() {
+            var txtCosData = document.getElementById('txtAns');
+            exp = Math.cos(txtCosData.value);
+            txtCosData.value = exp;
+        }
+        function tanData() {
+            var txttanData = document.getElementById('txtAns');
+            exp = Math.tan(txttanData.value);
+            txttanData.value = exp;
+        }
+        function logData() {
+            var txtlogData = document.getElementById('txtAns');
+            exp = Math.log(txtlogData.value);
+            txtlogData.value = exp;
+        }
+        function sqrtData() {
+            var txtsqrtData = document.getElementById('txtAns');
+            exp = Math.sqrt(txtsqrtData.value);
+            txtsqrtData.value = exp;
+        }
+        function sqrData() {
+            var txtsqrData = document.getElementById('txtAns');
+            exp = Math.pow(txtsqrData.value, 2);
+            txtsqrData.value = exp;
+        }
+        function caretData(n) {
+            var txtCaretData = document.getElementById('txtAns');
+            exp = Math.pow(txtCaretData.value, n);
+            txtCaretData.value = exp;
+        }
+        function dotExp() {
+            var txtDotData = document.getElementById('txtAns');
+
+            exp = ".";
+            txtDotData.value += exp;
+        }
+        function operator(op) {
+            var txtvalue = document.getElementById('txtAns');
+            
+            if(op == '%')
+            {
+                txtvalue.value /= 100;
+                return;
+            }
+
+            switch (old_op) {
+                case '+':
+                    //alert("hello");
+                    n1 = parseFloat(n1) + parseFloat(txtvalue.value);
+                    txtvalue.value = "";
+                    break;
+
+                case '-':
+                    //alert("hello");
+                    n1 -= parseInt(txtvalue.value);
+                    txtvalue.value = "";
+                    break;
+
+                case '*':
+                    //alert("hello");
+                    n1 *= parseFloat(txtvalue.value);
+                    txtvalue.value = "";
+                    break;
+
+                case '/':
+                    //alert("hello");
+                    n1 /= parseInt(txtvalue.value);
+                    txtvalue.value = "";
+                    break;
+
+                case '%':
+                    //alert("hello");
+                    n1 = parseFloat(n1 * txtvalue.value) / 100;
+                    txtvalue.value = "";
+                    break;
+
+                case '^':
+                    alert("hello");
+                    n1 = Math.pow(n1, txtvalue.value);
+                    txtvalue.value = "";
+                    break;
+
+                case 'pi':
+                    alert("hello");
+                    n1 = Math.PI;
+                    txtvalue.value = "";
+                    break;
+
+                default:
+                    n1 = parseInt(txtvalue.value);
+                    txtvalue.value = "";
+                    break;
+            }
+            old_op = op;
+
+            if (op == "=") {
+                txtvalue.value = n1;
+            }
+        }
+        function clearValue() {
+            document.getElementById('txtAns').value = "";
+        }
+
+
+    </script>
+    <table>
+        <tr>
+            <td>
+                <textarea id='txtAns' style="height: 50px; width: 210px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="visibility: hidden;" id='tblSci'>
+                    <tr>
+                        <td>
+                            <button id='btnsin' onclick="sinData();" style="height: 30px; width: 50px;">SIN</button>
+                            <button id='btncos' onclick="cosData()" style="height: 30px; width: 50px;">COS</button>
+                            <button id='btntan' onclick="tanData()" style="height: 30px; width: 50px;">TAN</button>
+                            <button id='btnlog' onclick="logData()" style="height: 30px; width: 50px;">LOG</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id='btnsqrt' onclick="sqrtData();" style="height: 30px; width: 50px;">\/
+                                ```
+                            </button>
+                            <button id='btnsqr' onclick="sqrData();" style="height: 30px; width: 50px;">SQR</button>
+                            <button id='btncaret' onclick="operator(this.value);" value="^"
+                                style="height: 30px; width: 50px;">^</button>
+                            <button id='btnpi' onclick="operator(this.value)" value="pi"
+                                style="height: 30px; width: 50px;">π</button>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <button id='btnScientific' onclick="showScientificTable();"
+                    style="height: 30px; width: 50px;">Sci</button>
+                <button id='btnPercentage' onclick="operator(this.value);" value="%"
+                    style="height: 30px; width: 50px;">%</button>
+                <button id='btnCE' onclick="CE();" style="height: 30px; width: 50px;">CE</button>
+                <button id='btnCE' onclick="backspace();" value="backspace" style="height: 30px; width: 50px;">
+                    <--</button> </td> </tr> <tr>
+            <td>
+                <button id='btnseven' onclick="showButtonValue(this);" style="height: 30px; width: 50px;">7</button>
+                <button id='btneight' onclick="showButtonValue(this);" style="height: 30px; width: 50px;">8</button>
+                <button id='btnnine' onclick="showButtonValue(this);" style="height: 30px; width: 50px;">9</button>
+                <button id='btndivision' onclick="operator(this.value);" value="/"
+                    style="height: 30px; width: 50px;">/</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button id='btnfour' onclick="showButtonValue(this);" style="height: 30px; width: 50px;">4</button>
+                <button id='btnfive' onclick="showButtonValue(this);" style="height: 30px; width: 50px;">5</button>
+                <button id='btnsix' onclick="showButtonValue(this);" style="height: 30px; width: 50px;">6</button>
+                <button id='btnmultiple' onclick="operator(this.value);" value="*"
+                    style="height: 30px; width: 50px;">*</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button id='btnone' onclick="showButtonValue(this);" style="height: 30px; width: 50px;">1</button>
+                <button id='btntwo' onclick="showButtonValue(this);" style="height: 30px; width: 50px;">2</button>
+                <button id='btnthree' onclick="showButtonValue(this);" style="height: 30px; width: 50px;">3</button>
+                <button id='btnminus' onclick="operator(this.value);" value="-"
+                    style="height: 30px; width: 50px;">-</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button id='btnzero' onclick="showButtonValue(this)" style="height: 30px; width: 50px;">0</button>
+                <button id='btndot' onclick="dotExp();" style="height: 30px; width: 50px;">.</button>
+                <button id='btnequal' onclick="operator(this.value);" value="="
+                    style="height: 30px; width: 50px;">=</button>
+                <button id='btnplus' onclick="operator(this.value);" value="+"
+                    style="height: 30px; width: 50px;">+</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button id='btnclear' onclick="clearValue();" style="height: 30px; width: 210px;">C</button>
+            </td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>

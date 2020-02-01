@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>001 Angular and Normalized Attribute Names</title>
+    </head>
+    <body>
+
+        <div style="background-color:#ffffaa" align = "center">
+            <script>
+                var c = '';
+                var opt = '';
+                var n = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+                var quiz = {"count": 1, "next": null, "previous": null, "results": [{"_class": "assessment", "id": 286330, "assessment_type": "multiple-choice", "created": "2014-09-13T04:30:31Z", "prompt": {"feedbacks": ["Close! However camel case starts with a lowercase letter.", "Correct!", "Close, however remember '-' is the minus sign in Javascript and thus incorrect.", "Close! However camel case starts with a lowercase letter, and subsequent words start with a capital."], "answers": ["FiveCharactersOnly", "fiveCharactersOnly", "five-Characters-Only", "Fivecharactersonly"], "relatedLectureIds": [], "question": "<p>  \t  &lt;customtextinput five-characters-only=&quot;true&quot; type=&quot;text&quot;&gt;&lt;/customtextinput&gt;  </p>  <p>  \t  Given the custom directive &#039;customtextinput&#039; above, what would AngularJS normalize the &#039;five-characters-only&#039; attribute to?  </p>"}, "correct_response": ["b"], "updated": "2014-09-22T01:38:37Z", "section": "", "question_plain": "&lt;customtextinput five-characters-only=&quot;true&quot; type=&quot;text&quot;&gt;&lt;/customtextinput&gt;      \t  Given the custom directive &#039;customtextinput&#039; above, what would AngularJS normalize the &#039;five-characters-only&#039; attribute to?", "related_lectures": [], "original_assessment_id": 0}]};
+
+                for (var i = 0; i < quiz.results.length; i++) {
+
+                    var question = '<font color="ff0000"><br><h3>Question-' + i + ': </h3> <b>' + quiz.results[i].prompt.question + '</b> <br>';
+
+                    for (var j = 0; j < quiz.results[i].prompt.answers.length; j++) {
+
+                        opt = opt.concat(quiz.results[i].prompt.answers[j] ? '<p style="cursor: pointer" onclick="this.style=\'font-weight: bold; color: #CE534D\'">' + n[j] + ': ' + quiz.results[i].prompt.answers[j].toString().replace(/,/g, '<br>') + '</p>' : '<br>');
+                    }
+                    var ans = quiz.results[i].correct_response ? '<p> <br> <input style="cursor: pointer" type="button" onclick="this.value=\'Answer is: ' + quiz.results[i].correct_response.toString() + '\'" value="Show Answer"></input> </p>' : '<br>';
+                    c = c.concat(question, opt, ans);
+                    opt = ''
+                    }
+                document.write(c);
+            </script>
+        </div>
+    </body>
+    </html>

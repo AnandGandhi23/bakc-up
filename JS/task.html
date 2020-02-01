@@ -1,0 +1,209 @@
+<html>
+
+<head>
+    <style>
+        p.click {
+            background: burlywood;
+            cursor: pointer;
+        }
+
+        p:hover{
+            cursor: pointer;
+        }
+        .oneline {
+            width: 200px;
+            height: auto;
+            border: solid 1px #ccc;
+            display: table-cell;
+        }
+
+        .sortdata
+        {
+            width: 200px;
+            height: auto;
+            border: solid 1px #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="oneline">
+        <p id="leftData"></p>
+
+    </div>
+
+    <div class="oneline" align="center">
+        
+        <input type="button" value=">" onclick="right_transfer()">
+        <br>
+        <br>
+        <input type="button" value=">>" onclick="transfer_all_right()">
+        <br>
+        <br>
+        <input type="button" value="<" onclick="left_transfer()">
+        <br>
+        <br>
+        <input type="button" value="<<" onclick="transfer_all_left()">
+    </div>
+    <div class="oneline">
+
+        <p id="RightData"></p>
+    </div>
+    <br>
+   
+    <div class="sortdata">
+        <h2>Sort Data</h2>
+        <p id="SortData"></p>
+    </div>
+    
+
+
+</body>
+<script type="text/javascript">
+    var arrLeft = ["anand", "khyati", "harsh"];
+    var arrRight = ["abcd"];
+    var left_selected_items = [];
+    var right_selected_items = [];
+
+    ShowLeftData();
+    ShowRightData();
+    ShowSortData();
+
+    function ShowLeftData() {
+        var str = "";
+        for (var i = 0; i < arrLeft.length; i++) {
+            str += '<p id="L' + i + '" onclick = "leftdata_click(' + i + ')" value="' + arrLeft[i] + '">' + arrLeft[i] + '</p>';
+        }
+
+        leftData.innerHTML = str;
+    }
+
+    function ShowRightData() {
+        var str = "";
+        for (var i = 0; i < arrRight.length; i++) {
+            str += '<p id="R' + i + '" onclick = "RightData_click(' + i + ')" value="' + arrRight[i] + '">' + arrRight[i] + '</p>';
+        }
+
+        RightData.innerHTML = str;
+    }
+
+    function ShowSortData() {
+        var arrSortData = arrRight.concat().sort();
+        var str = "";
+        for (var i = 0; i < arrSortData.length; i++) {
+            str += '<p id="S' + i + '" value="' + arrSortData[i] + '">' + arrSortData[i] + '</p>';
+        }
+
+        SortData.innerHTML = str;
+    }
+
+
+    function leftdata_click(id) 
+    {
+        
+        left_selected_items.indexOf(id) === -1 ? left_selected_items.push(id) : (left_selected_items.spliceleft_selected_items.indexOf(id), 1);
+        console.log(left_selected_items);
+        document.getElementById("L"+id).classList.toggle("click");
+    }
+
+    function RightData_click(id)
+    {
+        right_selected_items.indexOf(id) === -1 ? right_selected_items.push(id) : right_selected_items.splice(right_selected_items.indexOf(id), 1);
+        console.log(right_selected_items);
+        console.log(arrRight[id]);
+        document.getElementById("R"+id).classList.toggle("click");
+    }
+
+    function right_transfer()
+    {
+        if(left_selected_items.length == 0)
+        {
+            alert("No left item selected");
+            return;
+        }
+        var name = [];
+        for(var i=0; i<left_selected_items.length; i++)
+        {   
+            arrRight.push(arrLeft[left_selected_items[i]]);
+            name[i] = arrLeft[left_selected_items[i]];
+        }
+
+        for(var i=0; i<name.length; i++)
+        {
+            for(var j =0; j<arrLeft.length; j++)
+            {
+                if(name[i] == arrLeft[j])
+                {
+                    arrLeft.splice(j,1);
+                }
+            }
+        }
+
+        left_selected_items = [];
+        right_selected_items = [];
+        ShowLeftData();
+        ShowRightData();
+        ShowSortData();
+    }
+
+    function left_transfer()
+    {
+        if(right_selected_items.length == 0)
+        {
+            alert("No right item selected");
+            return;
+        }
+        var name = [];
+        for(var i=0; i<right_selected_items.length; i++)
+        {
+            arrLeft.push(arrRight[right_selected_items[i]]);
+            name[i] = arrRight[right_selected_items[i]];
+            console.log(arrRight[right_selected_items[i]]);
+        }
+
+        for(var i=0; i<name.length; i++)
+        {
+            for(var j =0; j<arrRight.length; j++)
+            {
+                if(name[i] == arrRight[j])
+                {
+                    arrRight.splice(j,1);
+                }
+            }
+        }
+
+        left_selected_items = [];
+        right_selected_items = [];
+        ShowLeftData();
+        ShowRightData();
+        ShowSortData();
+    }
+
+    function transfer_all_right()
+    {
+        arrLeft.forEach(element => {
+            arrRight.push(element);
+        });
+
+        arrLeft = [];
+
+        ShowLeftData();
+        ShowRightData();
+        ShowSortData();
+    }
+
+    function transfer_all_left()
+    {
+        arrRight.forEach(element => {
+            arrLeft.push(element);
+        });
+
+        arrRight = [];
+        ShowLeftData();
+        ShowRightData();
+        ShowSortData();
+    }
+</script>
+
+</html>

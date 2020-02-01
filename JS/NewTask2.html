@@ -1,0 +1,18 @@
+<html>
+<script type="text/javascript">
+    function Check(a, b, c) {
+        if (a <= 0 || b <= 0 || c <= 0) {
+            return false;
+        }
+
+        return (b < (a + c) && c < (a + b) && a < (b + c)) ? true : false;
+    }
+
+    console.log("1, 2, 2");
+    console.log(Check(1, 2, 2));
+
+    console.log("7, 2, 2");
+    console.log(Check(7, 2, 2));
+</script>
+
+</html>

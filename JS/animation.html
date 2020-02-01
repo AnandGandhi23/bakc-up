@@ -1,0 +1,20 @@
+<html>
+
+    <head>
+        <script type="text/javascript">
+            if(document.images) {
+               var image1 = new Image();     // Preload an image
+               image1.src = "https://www.google.com/url?sa=i&source=imgres&cd=&ved=2ahUKEwjzh6zK6-TmAhXaAnIKHRk4DYIQjRx6BAgBEAQ&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fbeauty%2F&psig=AOvVaw2JdMzlTglB03leK9SMG3OL&ust=1578051902759876";
+               var image2 = new Image();     // Preload second image
+               image2.src = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw0rwkicJ4OZwA1tbXsItQpD&ust=1578051899798000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOjb3Mnr5OYCFQAAAAAdAAAAABAI";
+            }
+        </script>
+    </head>
+
+    <body>
+        <a href="#" onMouseOver="document.myImage.src = image2.src;" onMouseOut="document.myImage.src = image1.src;">
+            <img name="myImage" src="https://www.google.com/url?sa=i&source=imgres&cd=&ved=2ahUKEwjzh6zK6-TmAhXaAnIKHRk4DYIQjRx6BAgBEAQ&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fbeauty%2F&psig=AOvVaw2JdMzlTglB03leK9SMG3OL&ust=1578051902759876" />
+        </a>
+    </body>
+
+</html>

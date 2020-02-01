@@ -1,0 +1,12 @@
+<html>
+    <script type="text/javascript">
+        let mymap = new Map([[1,"one"], [2,"two"], [3,"three"]]);
+        for (const [key,value] of mymap) {
+            console.log(key + "-" + value);
+        }
+
+        mymap.forEach((value, key)=>{
+            console.log(key + "-" + value);
+        })
+    </script>
+</html>

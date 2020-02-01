@@ -1,0 +1,57 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    height: auto;
+    width: 400px;
+}
+
+.cardContainer {
+    padding: 10px;
+    margin: 50px;
+}
+
+#tblDisplayData tr:hover {
+    cursor: pointer;
+    background: lightgrey;
+
+}
+
+input[disabled="disabled"] {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+input[type=text].ng-invalid.ng-touched,
+input[type=email].ng-invalid.ng-touched {
+    box-shadow: 0 0 5px red;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: rgb(67, 185, 86);
+}
+
+li a.active {
+    color: white;
+    background-color: rgb(24, 136, 28);
+}

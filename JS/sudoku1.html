@@ -1,0 +1,65 @@
+<html>
+<style>
+    .td1
+    {
+        height: 50px;
+        width: 50px;
+        border-color: white;
+        text-align: center;
+        size: 10px;
+    }
+
+    .td2
+    {
+        height: 50px;
+        width: 50px;
+        text-align: center;
+    }
+</style>
+
+
+<body>
+    <table id="tblSudoku" align="center">
+        <tbody></tbody>
+    </table>
+
+    <script type="text/javascript">
+        var arrSudoku = [
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+        ];
+
+        createSudoku();
+        function createSudoku() 
+        {
+            var str = "";
+            for (var i = 0; i < 9; i++) 
+            {
+                str += `<tr>`;
+                for (var j = 0; j < 9; j++) {
+                    
+                    if (arrSudoku[i][j] == 0) {
+                        str += `<td "><input type="text" class="td2" id="` + i + j + `"/></td>`
+                    }
+                    else {
+                        str += `<td ><input type="text" class="td1" readonly="true" id="` + i + j + `" value="` + arrSudoku[i][j] + `" /></td>`
+                    }
+                }
+                str += `</tr>`;
+            }
+
+            var tblSudoku = document.getElementById("tblSudoku");
+            tblSudoku.tBodies[0].innerHTML = str;
+        }
+
+    </script>
+</body>
+
+</html>

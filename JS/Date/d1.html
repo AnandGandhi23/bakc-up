@@ -1,0 +1,39 @@
+<html>
+    <script type="text/javascript">
+        var date = new Date();
+        alert(date);
+
+        console.log(date.getDate());
+        console.log(date.getMonth());
+        console.log(date.getFullYear());
+        console.log(date.getHours());
+        console.log(date.getMinutes());
+        console.log(date.getSeconds());
+        console.log(date.getTime());
+        
+    </script>
+
+    <body>
+        <input type="date" placeholder="Enter date" id="txtDate">
+        <br>
+        <br>
+        <input type="button" value="click" onclick="javacsript:evaluateDate()">
+
+        <script type="text/javascript">
+            function evaluateDate() {
+                var objdate = new Date(document.getElementById("txtDate").value);
+                console.log(objdate);
+                console.log(date);
+
+                if(objdate > date )
+                {
+                    alert("you have chosen future date");
+                }
+                else
+                {
+                    alert("you have chosen past date");
+                }
+            }
+        </script>
+    </body>
+</html>

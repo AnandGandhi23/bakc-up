@@ -1,0 +1,12 @@
+[{
+    "id" : 1,
+    "name" : "anand gandhi",
+    "email" : "anand@gmail.com",
+    "birthdate" : "23-08-1997"
+},
+{
+    "id" : 2,
+    "name" : "anisha gaywala",
+    "email" : "anisha@gmail.com",
+    "birthdate" : "13-08-1998"
+}]

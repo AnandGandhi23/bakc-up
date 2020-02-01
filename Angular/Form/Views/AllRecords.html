@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body ng-app="">
+    <div class="container">
+        <table width="70%" id="tblDisplayData" class="table table-stripped">
+            <tr>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Options
+                </th>
+            </tr>
+            <tr ng-repeat="item in data">
+                <td><img src="{{item.ProfilePic}}" height="50px" width="50px"></td>
+                <td>{{item.Name}}</td>
+                <td>{{item.Email}}</td>
+                <td>{{item.Gender}}</td>
+                <td>
+                    <button ng-click="updateData(item._id)" value="Update" class="btn btn-primary">Update</button>
+                    <button ng-click="deleteData(item._id)" value="Delete" class="btn btn-primary">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <p>Welcome, <p id="name"></p></p>
+    </body>
+
+    <script>
+        var AllCookies = document.cookie;
+        console.log(AllCookies);
+        var individualcookie = AllCookies.split(";")
+        console.log(individualcookie);
+        for(var i = 0; i< individualcookie.length; i++)
+        {
+            var cookie = individualcookie[i];
+
+            while(cookie.charAt(0) == " ")
+            {
+                cookie = cookie.substring(1);
+            }
+
+            if(cookie.indexOf("Username") == 0)
+            {
+                document.getElementById("name").innerHTML = cookie.substring(9, cookie.length);
+            }
+        }
+    </script>
+</html>

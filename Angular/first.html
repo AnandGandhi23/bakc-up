@@ -1,0 +1,16 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js">
+</script>
+
+<body ng-app="" ng-init="name='anand'">
+    <p>Name : <input type="text" ng-model="name"></p>
+    <h1>Hello {{name}}
+
+        <p ng-bind="name"></p>
+
+        <p>
+            10 + 10 = {{10+10}}
+            {{name}}
+        </p>
+</body>
+</html>

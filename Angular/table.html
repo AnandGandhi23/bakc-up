@@ -1,0 +1,81 @@
+<html>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: #f1f1f1;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+<body ng-app="app" ng-controller="myctrl" ng-init="count=0">
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Country</th>
+        </tr>
+        <tr ng-repeat="x in data | orderBy : 'Country'">
+            <td>
+                {{x.Name}}
+            </td>
+            <td>
+                {{x.City}}
+            </td>
+            <td>
+                {{x.Country}}
+            </td>
+        </tr>
+    </table>
+
+    <select ng-model="select" ng-options="name as x.Name for x in data"></select>
+
+    <br>
+    <br>
+
+    <button ng-click="toggle()">Click me</button>
+    </br>
+    {{count}}
+    <br>
+    <br>
+    <div ng-show="showMe">
+            <h1 ng-mousemove="myFunc($event)">Menu:</h1>
+            <div>Pizza</div>
+            <div>Pasta</div>
+            <div>Pesce</div>
+    </div>
+
+    Coordinate x: {{x}}
+    Coordinate y: {{y}}
+    <script>
+        var app = angular.module("app", []);
+        app.controller("myctrl", ($scope, $http) => {
+            $http.get("data.json").then((response) => {
+                $scope.data = response.data.records;
+                console.log(response.data.records);
+            })
+            $scope.showMe = false;
+            $scope.toggle = ()=>{
+                $scope.count++ ;
+                $scope.showMe = !$scope.showMe;
+            }
+
+            $scope.myFunc = (myE)=>{
+                $scope.x = myE.clientX;
+                $scope.y = myE.clientY;
+            }
+        })
+    </script>
+</body>
+
+</html>

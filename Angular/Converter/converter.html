@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="converterController.js"></script>
+    <script src="convertService.js"></script>
+</head>
+
+<body ng-app="converter" ng-controller="controller1" ng-init="txtQuantity=1;txtCosts=1">
+    <form>
+        <h1>
+            Invoice
+        </h1>
+        Quantity : <input type="text" ng-model="txtQuantity" name="txtQuantity">
+        <br>
+        Costs : <input type="text" ng-model="txtCosts" name="txtCosts">
+        <select ng-model="select" >
+            <option ng-repeat="c in currencies">{{c}}</option>
+        </select>
+        <br>
+        <b>Total: </b>
+        <span ng-repeat="c in currencies">
+            {{convert(c) | currency:c}}
+        </span>
+        <br>
+        <button ng-model="btnPay" ng-click="pay()">Pay</button>
+    </form>
+</body>
+
+</html>

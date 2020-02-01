@@ -1,0 +1,61 @@
+<html>
+<script type="text/javascript">
+    var arrChips = [5, 20, 1];
+
+    var days = 0;
+    finddays();
+    function finddays() {
+        var choose = [];
+        var flag = 0;
+        //var max = Math.max(arrChips);
+
+        for (var i = 0; i < arrChips.length; i++) {
+            if (arrChips[i] == 0) {
+                flag++;
+            }
+        }
+
+        while (flag < 2) {
+            if (arrChips[0] > arrChips[1]) {
+                choose.push(0);
+            }
+            else {
+                choose.push(1);
+            }
+
+            if (arrChips[1] > arrChips[2]) {
+                if (choose.indexOf(1) != "-1") //array ma 1 6e
+                {
+                    if (arrChips[0] > arrChips[2]) {
+                        choose.push(0);
+                    }
+                    else {
+                        choose.push(2)
+                    }
+                }
+                else {
+                    choose.push(1);
+                }
+            }
+            else {
+                choose.push(2);
+            }
+            console.log(choose);
+
+            for (var j = 0; j < choose.length; j++) {
+                arrChips[choose[j]] = arrChips[choose[j]] - 1;
+            }
+
+            days++;
+            choose = [];
+            for (var i = 0; i < arrChips.length; i++) {
+                if (arrChips[i] == 0) {
+                    flag++;
+                }
+            }
+        }
+        alert("max days = " + days);
+    }
+</script>
+
+</html>

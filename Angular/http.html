@@ -1,0 +1,18 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js">
+</script>
+
+<body ng-app="myapp" ng-controller="myctrl">
+    <h1>{{message}}</h1>
+
+    <script>
+        var app = angular.module("myapp", []);
+        app.controller("myctrl", ($scope, $http) => {
+            $http.get("data.json").then((response) => {
+                $scope.message = response.data.records;
+            })
+        })
+    </script>
+</body>
+
+</html>

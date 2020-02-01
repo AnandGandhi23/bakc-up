@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            function showTutorial(text)
+            {
+                document.getElementById("txtSelect").value = text;
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <input type="text" id="txtSelect">
+
+        </form>
+
+        <img src="C:\Users\lcom1\Desktop\download.jpg" alt = "HTML Map" border = "0" usemap = "#tutorials"/>
+        <map name="tutorials">
+            <area shape="poly"
+            coords = "74,0,113,29,98,72,52,72,38,27"
+            href = "https://www.google.com/" alt = "Perl Tutorial"
+            target = "_self" 
+            onMouseOver = "showTutorial('perl')" 
+            onMouseOut = "showTutorial('')"/>
+
+            <area shape = "rect" 
+            coords = "22,83,126,125"
+            href = "https://www.google.com/" alt = "HTML Tutorial" 
+            target = "_self" 
+            onMouseOver = "showTutorial('html')" 
+            onMouseOut = "showTutorial('')"/>
+         
+         <area shape = "circle" 
+            coords = "73,168,32"
+            href = "https://www.google.com/" alt = "PHP Tutorial"
+            target = "_self" 
+            onMouseOver = "showTutorial('php')" 
+            onMouseOut = "showTutorial('')"/>
+        </map>
+    </body>
+</html>

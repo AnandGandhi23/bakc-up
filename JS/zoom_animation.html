@@ -1,0 +1,52 @@
+<html>
+    <body>
+        <img id="image" src="D:\Divyang\js\janak\img\3.jpg" height="100" width="100">
+        <br>
+        <button onclick="ZoomIn()">Zoom In</button>
+        <button onclick="ZoomOut()">Zoom Out</button>
+        <button onclick="Reset()">Reset</button>
+
+        <script type="text/javascript">
+            
+
+            function ZoomIn()
+            {
+                var pic= document.getElementById("image");
+                var h = pic.height;
+                console.log(h);
+                if(h < 300)
+                {
+                    pic.height = pic.height + 50;
+                    pic.width = pic.width + 50;
+                } 
+                else
+                {
+                    alert("Max size reached");
+                }
+            }
+
+            function ZoomOut()
+            {
+                var pic= document.getElementById("image");
+                var h = pic.height;
+                console.log(h);
+                if(h > 100)
+                {
+                    pic.height = pic.height - 50;
+                    pic.width = pic.width - 50;
+                } 
+                else
+                {
+                    alert("Min size reached");
+                }
+            }
+
+            function Reset()
+            {
+                var pic= document.getElementById("image");
+                pic.height = 100;
+                pic.width = 100;
+            }
+        </script>
+    </body>
+</html>

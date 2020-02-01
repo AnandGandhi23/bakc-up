@@ -1,0 +1,38 @@
+<html>
+<script type="text/javascript">
+
+    function Person(fname, lname, birthdate) {
+        this.firstname = fname;
+        this.lastname = lname;
+        this.birthdate = birthdate;
+    }
+    Person.prototype.name = function()
+    {
+        return "Hello " + this.firstname + " " + this.lastname;
+    }
+</script>
+
+<body>
+    <input type="text" placeholder="first name" id="txtfName">
+    <br>
+    <input type="text" placeholder="last name" id="txtlname">
+    <br>
+    <input type="date" placeholder="Birthdate" id="txtBirthdate">
+    <br>
+
+    <input type="button" value="click me" onclick="CallClass()">
+    <br>
+    <p id="demo"></p>
+    <script>
+        function CallClass() {
+            var txtfName = document.getElementById("txtfName");
+            var txtlname = document.getElementById("txtlname");
+            var txtBirthdate = document.getElementById("txtBirthdate");
+            var objPerson = new Person(txtfName.value, txtlname.value, txtBirthdate.value);
+
+            document.getElementById("demo").innerHTML = objPerson.name();
+        }
+    </script>
+</body>
+
+</html>

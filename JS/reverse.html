@@ -1,0 +1,23 @@
+<html>
+    <body>
+        <input type="text" placeholder="input anything" id="txtData">
+        <br>
+        <input type="button" value="reverse" onclick="reverse()">
+        <br>
+        <p id="reversedata"></p>
+
+        <script type="text/javascript">
+            function reverse(data) 
+            {
+                var strData = document.getElementById("txtData").value;
+                var length = strData.length;
+                var arrReverse = [];
+                console.log(strData);
+                for(var i = 1; i <= length; i++)
+                {
+                    document.getElementById("reversedata").innerHTML += strData.substring(length - i, length - i + 1);
+                }
+            }
+        </script>
+    </body>
+</html>

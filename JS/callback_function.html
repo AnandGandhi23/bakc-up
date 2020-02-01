@@ -1,0 +1,26 @@
+<html>
+    <script type="text/javascript">
+        function doHomework(subject, callback) 
+        {
+            alert("started my " + subject + " homework");
+
+            callback();    
+        }
+
+        doHomework("math", function () {
+            alert("completed my homework");
+        });
+
+        function sum(a, b, callback) 
+        {
+            alert("a and b has arrived");
+            callback(a,b);    
+        }
+
+        function callbacksum(a,b) {
+            alert(a+b);
+        }
+
+        sum(4,5,callbacksum);
+    </script>
+</html>

@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            function over()
+            {
+                alert("mouse is over div");
+            }
+            function out()
+            {
+                alert("mouse is out of div");
+            }
+            function clickme()
+            {
+                alert("button is clicked");
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="divBox" onmouseover="over()" onmouseout="out()">
+            <h4>Event</h4>
+        </div>
+
+        <br/>
+        <input type="button" value="Click me" onclick="clickme()"/>
+    </body>
+</html>

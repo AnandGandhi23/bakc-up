@@ -1,0 +1,81 @@
+<html>
+<title>Login</title>
+
+<head>
+    <script type="text/javascript">
+        function User(Username, Password)
+        {
+            this.Username = Username;
+            this.Password = Password;
+        }
+        
+        function Login()
+        {
+            var strUsername = document.getElementById("txtUsername").value;
+            var strPassword = document.getElementById("txtPassword").value;
+
+            var flag = false;
+            for(var i =0;i<arrUser.length;i++)
+            {
+                if(arrUser[i].Username == strUsername && arrUser[i].Password == strPassword)
+                {
+                    flag = true;
+                }
+            }
+
+            if(flag)
+            {
+                alert("Successfully login");
+                    document.cookie = "Username = " + strUsername;
+                    document.cookie = "Password = " + strPassword;
+                    console.log(document.cookie);
+                    window.location = "D:/\Anand/\JS/\After_Login.html";
+            }
+            else{
+                alert("Invalid username or password");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form method="POST">
+        <table border="1" cellpadding="2" cellspacing="2">
+            <tr>
+                <td>
+                    Username
+                </td>
+                <td>
+                    <input type="text" id="txtUsername">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Password
+                </td>
+                <td>
+                    <input type="password" id="txtPassword">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <input type="button" value="Login" onclick="javascript:Login();">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script type="text/javascript">
+        var objUser = new User("Anand", "Anand123");
+        var objUser1 = new User("Anisha", "Anisha123");
+        var arrUser = new Array();
+        arrUser.push(objUser);
+        arrUser.push(objUser1);
+    </script>
+</body>
+
+</html>

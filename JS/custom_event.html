@@ -1,0 +1,50 @@
+<html>
+
+<body>
+    <h1>Custom Event</h1>
+    <main>
+    </main>
+
+    <script type="text/javascript">
+        let born = new Event("born");
+        let died = new CustomEvent("died", { detail: new Date() });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let objMain = document.querySelector("main");
+            addParagraph(objMain, "First Paragraph....");
+            addParagraph(objMain, "Second Paragraph....");
+            objMain.addEventListener("click", function (ev) {
+                removePragraph(objMain, objMain.firstElementChild);
+            })
+        });
+
+        function addParagraph(parent, paragraphText) {
+            let p = document.createElement("p");
+            p.textContent = paragraphText;
+
+            p.addEventListener("born", wasBorn);
+            p.addEventListener("died", wasDied);
+
+            p.dispatchEvent(born);
+            parent.appendChild(p);
+        }
+
+        function removePragraph(parent, p) {
+            p.dispatchEvent(died);
+            parent.removeChild(p);
+        }
+
+        function wasBorn(ev) {
+            console.log(ev.type, ev.target);
+        }
+
+        function wasDied(ev) {
+            console.log(ev.type, ev.target);
+            ev.target.removeEventListener("born", wasBorn);
+            ev.target.removeEventListener("died", wasDied);
+        }
+    </script>
+
+</body>
+
+</html

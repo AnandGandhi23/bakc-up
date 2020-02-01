@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <p id="array"></p>
+        <input type="button" value="click" onclick="javascript:sum()">
+        <p>The sum is <p id="sum"></p></p>
+
+        <script type="text/javascript">
+            var arrNumbers = ['12.5', '10', '16.5', '12'];
+            document.getElementById("array").innerHTML = arrNumbers;
+            function sum() {
+                document.getElementById("sum").innerHTML = arrNumbers.reduce(getSum, 0);
+            }
+
+            function getSum(total, num) {
+                return total + Math.round(num);
+            }
+        </script>
+    </body>
+</html>

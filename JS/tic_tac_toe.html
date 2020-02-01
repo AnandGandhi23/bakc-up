@@ -1,0 +1,137 @@
+<html>
+<style>
+    #box {
+        width: 350px;
+        overflow: auto;
+        margin: 40px auto;
+        background: #666;
+        padding-bottom: 40px;
+        border-radius: 10px;
+    }
+
+    #tblTicTacToe td {
+        margin: 10px;
+        height: 70px;
+        width: 70px;
+        font-size: 50px;
+        background: #333;
+        color: white;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div id="box" align="center">
+        <header><h2 style="color: white;">Tic Tac Toe</h2></header>
+        <table id="tblTicTacToe" border="1">
+            <tr>
+                <td id="0" onclick="javascript:turn1(this.id);">
+                </td>
+                <td id="1" onclick="javascript:turn1(this.id);">
+                <td id="2" onclick="javascript:turn1(this.id);">
+            </tr>
+            <tr>
+                <td id="3" onclick="javascript:turn1(this.id);">
+                <td id="4" onclick="javascript:turn1(this.id);">
+                <td id="5" onclick="javascript:turn1(this.id);">
+            </tr>
+            <tr>
+                <td id="6" onclick="javascript:turn1(this.id);">
+                <td id="7" onclick="javascript:turn1(this.id);">
+                <td id="8" onclick="javascript:turn1(this.id);">
+            </tr>
+
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        var turn = 0;
+        function turn1(id) {
+            var td = document.getElementById(id);
+            console.log(td.innerText);
+            if (td.innerText == "") {
+                if (turn % 2 == 0) {
+                    td.innerText = "O";
+                    winner();
+                }
+                else {
+                    td.innerText = "X";
+                    winner() ;
+                }
+            }
+            else{
+                return;
+            }
+            turn++;  
+        }
+
+        function reset(){
+            document.getElementById("0").innerText = "";
+            document.getElementById("1").innerText = "";
+            document.getElementById("2").innerText = "";
+            document.getElementById("3").innerText = "";
+            document.getElementById("4").innerText = "";
+            document.getElementById("5").innerText = "";
+            document.getElementById("6").innerText = "";
+            document.getElementById("7").innerText = "";
+            document.getElementById("8").innerText = "";
+
+            turn = 0;
+        }
+
+        function winner() {
+            var d0 = document.getElementById("0").innerText;
+            var d1 = document.getElementById("1").innerText;
+            var d2 = document.getElementById("2").innerText;
+            var d3 = document.getElementById("3").innerText;
+            var d4 = document.getElementById("4").innerText;
+            var d5 = document.getElementById("5").innerText;
+            var d6 = document.getElementById("6").innerText;
+            var d7 = document.getElementById("7").innerText;
+            var d8 = document.getElementById("8").innerText;
+
+            if (d0 === d1 && d1 === d2 && d0 != "") {
+                alert(d0 + " is winner");
+                reset();
+                return;
+            }
+            else if (d3 === d4 && d4 === d5 && d3 != "") {
+                alert(d3 + " is winner");
+                reset();
+                return;
+            }
+            else if (d6 === d7 && d7 === d8 && d6 != "") {
+                alert(d6 + " is winner");
+                reset();
+                return;
+            }
+            else if (d0 == d4 && d4 == d8 && d0!= "") {
+                alert(d0 + " is winner");
+                reset();
+                return;
+            }
+            else if (d2 == d4 && d4 == d6 && d2 != "") {
+                alert(d2 + " is winner");
+                reset();
+                return;
+            }
+            else if (d0 == d3 && d3 == d6 && d0 != "") {
+                alert(d0 + " is winner");
+                reset();
+                return;
+            }
+            else if (d1 == d4 && d4 == d7 && d1 != "") {
+                alert(d1 + " is winner");
+                reset();
+                return;
+            }
+            else if (d2 == d6 && d6 == d8 && d2 != "") {
+                alert(d2 + " is winner");
+                reset();
+                return;
+            }
+        }
+    </script>
+</body>
+
+</html>

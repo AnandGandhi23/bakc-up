@@ -1,0 +1,77 @@
+<html>
+
+    <head>
+        <script type="text/javascript">
+            function validate() {
+                var txtName = document.getElementById("txtname");
+                if (txtName.value == "") {
+                    alert("Please enter name");
+                    txtName.focus();
+                    return false;
+                }
+
+                var txtEmail = document.getElementById("txtemail");
+                var EmailPattern = /^([a-zA-Z0-9\.\_])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z{2,4}])+$/;
+                if(txtEmail.value == "" || !EmailPattern.test(txtEmail.value))
+                {
+                    alert("Please enter proper email");
+                    txtEmail.focus();
+                    return false;
+                }
+
+                var txtmob = document.getElementById("txtmob");
+                var MobPattern = /^[789]{1}[0-9]{9}/;
+                if(txtmob.value == "" || !MobPattern.test(txtmob.value))
+                {
+                    alert("Please enter proper mobile no.");
+                    txtmob.focus();
+                    return false;
+                }
+
+                alert("success");
+                return true;
+            }
+        </script>
+    </head>
+
+    <body>
+        <form name="myform" method="POST">
+            <table border="1">
+                <tr>
+                    <td width="60">
+                        Name:
+                    </td>
+                    <td>
+                        <input type="text" id="txtname">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Email:
+                    </td>
+                    <td>
+                        <input type="text" id="txtemail">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Mob:
+                    </td>
+                    <td>
+                        <input type="text" id="txtmob">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <input type="button" value="submit" onclick="validate();">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+
+</html>

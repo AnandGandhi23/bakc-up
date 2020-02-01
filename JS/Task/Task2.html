@@ -1,0 +1,28 @@
+<html>
+    <body>
+        <div id="divName" onclick="ClickCounter()">Anand Gandhi</div>
+
+        <script type="text/javascript">
+            function ClickCounter()
+            {
+                let div = document.getElementById("divName");
+                if(div.getAttribute("count_click") == null)
+                {
+                    div.setAttribute("count_click", 0)
+                }
+                else
+                {
+                    var count = div.getAttribute("count_click");
+                    count++;
+                    div.setAttribute("count_click",count);
+
+                    if(count>= 10)
+                    {
+                        alert("10 clicks");
+                        return;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

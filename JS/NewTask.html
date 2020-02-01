@@ -1,0 +1,75 @@
+<html>
+    <body>
+        
+        <input type="text" id="txtData" placeholder="Enter your text here">
+        <br>
+        <br>
+        <input type="button" value="Click here" onclick="createText()">
+        <p id="text" ></p>
+
+        <script type="text/javascript">
+
+            // function createText()
+            // {
+            //     var strAppendText = "";
+            //     var strData = document.getElementById("txtData").value;
+            //     var arrData = strData.split(",");
+
+            //     if(strData == "[]" || strData == "")
+            //     {
+            //         strAppendText = "no one likes this";
+            //     }
+            //     else
+            //     {
+            //         if(arrData.length == 1)
+            //         {
+            //             strAppendText = arrData[0] + " likes this";
+            //         }else if(arrData.length > 1 && arrData.length <= 3)
+            //         {
+            //             for(var i = 0; i< arrData.length-1; i++)
+            //             {
+            //                 strAppendText += arrData[i] + ", ";    
+            //             }
+            //             strAppendText = strAppendText.substring(0, strAppendText.length - 2);
+            //             strAppendText += " and " + arrData[arrData.length-1] + " like this";
+            //         }
+            //         else
+            //         {
+            //             for(var i = 0; i< 2; i++)
+            //             {
+            //                 strAppendText += arrData[i] + ", ";    
+            //             }
+            //             strAppendText = strAppendText.substring(0, strAppendText.length - 2);
+            //             strAppendText += " and " + (arrData.length - 2) + " others like this";
+            //         }
+            //     }
+            
+            //     document.getElementById("text").innerHTML = strAppendText;
+            // }
+
+            var arrData = [];
+            function createText()
+            {
+                var strData = document.getElementById("txtData").value;
+                arrData = strData.split(",");
+                if(strData == "[]" || strData == "")
+                    document.getElementById("text").innerHTML = "no one likes this";                
+                else
+                    document.getElementById("text").innerHTML = ReturnValue(arrData.length);
+            } 
+
+            function ReturnValue(length)
+            {
+                if(length <=1)
+                    return arrData[0] + " like this"; 
+                else if(length <=3)
+                    if(length == 2)
+                        return arrData[0] + " and " + arrData[1] + " likes this"; 
+                    else
+                        return arrData[0] + ", " + arrData[1] + " and " + arrData[2] + " like this"; 
+                else
+                    return arrData[0] + ", " + arrData[1] + " and " + (arrData.length - 2) + " others like this";
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+    <script>
+        var strData1 = "my name is anand gandhi.";
+        var strData2 = "I live in India.";
+
+        console.log(strData1.charAt(12));
+        console.log(strData1.concat(strData2));
+        console.log(strData1.substr(4,3));
+        
+        console.log(strData1.replace("gandhi", "shah"));
+    </script>
+    <body>
+        <p id="firstString"></p>
+        <p id="secondString"></p>
+
+        <input type="text" id="txtSearch">
+        <br>
+        <br>
+        <input type="button" value="Search" onclick="search()">
+        <script>
+            document.getElementById("firstString").innerHTML = strData1;
+            document.getElementById("secondString").innerHTML = strData2;
+
+            function search() {
+                var data = document.getElementById("txtSearch").value;
+
+                if(strData1.includes(data))
+                {
+                    alert(data + " is there in string");
+                }
+                else{
+                    alert(data + " is not there in string");
+                }
+            }
+        </script>
+    </body>
+
+</html>

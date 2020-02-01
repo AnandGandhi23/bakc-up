@@ -1,0 +1,290 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        var Username;
+        var allcookies = document.cookie;
+        var individualcookies = allcookies.split(";");
+        console.log(allcookies);
+        console.log(individualcookies);
+
+        for (var i = 0; i < individualcookies.length; i++) {
+            var c = individualcookies[i];
+            while (c.charAt(0) == " ") {
+                c = c.substring(1);
+            }
+
+            if (c.indexOf("Username") == 0) {
+                Username = c.substring(9, c.length);
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    This is new page
+    <br>
+    Welcome, <label id="lblName"></label>
+
+    <br>
+    <br>
+    <br>
+    <form method="POST" onsubmit="onsubmit1(event)">
+        <center>
+            <table border="1" cellspacing="2" cellpadding="2">
+                
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        <input type="text" id="txtName" required>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Birthdate
+                    </td>
+                    <td>
+                        <input type="date" id="txtDate" required>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Age
+                    </td>
+                    <td>
+                        <input type="text" id="txtAge" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Hobbies
+                    </td>
+                    <td>
+                        <input type="checkbox" id="chkDance" name="hobbies" value="Dancing" checked><label for="chkDance">Dancing</label>
+                        <input type="checkbox" id="chkRead" name="hobbies" value="Reading"><label for="chkRead">Reading</label> <br>
+                        <input type="checkbox" id="chkWrite" name="hobbies" value="Writing"><label for="chkWrite">Writing</label>
+                        <input type="checkbox" id="chkTravell" name="hobbies" value="Travelling"><label for="chkTravell">Travelling</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="2">
+                        <input type="submit" id="submit" value="Insert">
+                    
+                        <input type="button" id="Send" value="Send" onclick="sendToPhp();">
+                    </td>
+                </tr>
+            </table>
+        </center>
+
+        <br>
+        <table id="tblDisplay_Data" align="center" border="1">
+            <thead>
+                <tr>
+                    <td colspan="6" align="center">
+                        Search : 
+                        <input type="text" id="txtSearch" oninput="search(this.value);">
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Birthdate
+                    </th>
+                    <th>
+                        Age
+                    </th>
+                    <th>
+                        Hobbies
+                    </th>
+                    <th colspan="2">
+                        Options
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </form>
+    <script type="text/javascript">
+        document.getElementById("lblName").innerHTML = Username;
+
+        var flag = 0;
+        Display_Data();
+        function User(Name, Birthdate, Age, Hobbies)
+        {
+            this.Name = Name;
+            this.Birthdate = Birthdate;
+            this.Age = Age;
+            this.Hobbies = Hobbies;
+        }
+        function onsubmit1(event)
+        {
+            event.preventDefault();
+            var strCheckedValue = "";
+            var checkboxes = document.getElementsByName("hobbies");
+            var checkedcheckboxes = [];
+            console.log(checkboxes);
+            for(var i=0; i<checkboxes.length; i++)
+            {
+                if(checkboxes[i].checked)
+                {
+                    strCheckedValue = strCheckedValue + checkboxes[i].value + ",";
+                }
+            }
+            strCheckedValue = strCheckedValue.substring(0, strCheckedValue.length -1);
+
+            if(strCheckedValue == [])
+            {
+                alert("please choose a hobby");
+                return;                
+            }
+
+            var Name = document.getElementById("txtName");
+            var Birthdate = document.getElementById("txtDate");
+            var Age = document.getElementById("txtAge");
+            var btnInsertUpdate = document.getElementById("submit");
+
+            var strName = Name.value;
+            var strBirthdate = Birthdate.value;
+            var strAge = Age.value;
+
+            if(btnInsertUpdate.value == "Insert")
+            {
+                var objUser = new User(strName, strBirthdate, strAge, strCheckedValue);
+                var data1 = [];
+                data1 = JSON.parse(localStorage.getItem("user"));
+                
+                
+                data1.push(objUser);
+                console.log(data1);
+                
+                localStorage.setItem("user", JSON.stringify(data1));
+            
+                Name.value = "";
+                Birthdate.value = "";
+                Age.value = "";
+            }
+            else
+            {
+                console.log(flag);
+                var data = JSON.parse(localStorage.getItem("user"));
+                data[flag].Name = strName;
+                data[flag].Birthdate = strBirthdate;
+                data[flag].Age = strAge;
+                data[flag].Hobbies = strCheckedValue;
+
+                Name.value = "";
+                Birthdate.value = "";
+                Age.value = "";
+            }
+            Display_Data();
+        }
+
+        function Display_Data()
+        {
+            var data = JSON.parse(localStorage.getItem("user"));
+            var strData="";
+
+            for(var i=0; i<data.length; i++)
+            {
+                var element=data[i];
+                strData += '<tr>';
+
+                strData += '<td>' + element.Name + '</td>';
+                strData += '<td>' + element.Birthdate + '</td>';
+                strData += '<td>' + element.Age + '</td>';
+                strData += '<td>' + element.Hobbies + '</td>';
+                strData += '<td><input type="button" value="edit" onclick="UpdateRecord('+ i +');"/></td>';
+                strData += '<td><input type="button" value="delete" onclick="Delete('+ i +');"/></td>';
+                strData += '</tr>';
+            }
+
+            let tblDisplay_Data = document.getElementById("tblDisplay_Data");
+            tblDisplay_Data.tBodies[0].innerHTML = strData;
+        }
+
+        function Delete(i)
+        {
+            if(confirm("Are you sure want to delete?"))
+            {
+                data.splice(i,1);
+                Display_Data();
+            }
+            else{
+                return;
+            }
+        }
+
+        function UpdateRecord(i)
+        {
+            flag = i;
+            var name = document.getElementById("txtName");
+            var birthdate = document.getElementById("txtDate");
+            var age = document.getElementById("txtAge");
+            var checkboxes = document.getElementsByName("hobbies");
+            
+            var data = JSON.parse(localStorage.getItem("user"));
+            name.value = data[i].Name;
+            birthdate.value = data[i].Birthdate;
+            age.value = data[i].Age;
+
+            var hobbies = data[i].Hobbies.split(",");
+
+            for(var i =0;i<checkboxes.length; i++)
+            {
+                for(var j =0; j<hobbies.length; j++)
+                {
+                    if(checkboxes[i].value == hobbies[j])
+                    {
+                        checkboxes[i].checked = true;
+                        break;
+                    }
+                    else{
+                        checkboxes[i].checked = false;
+                    }
+                }
+            }
+            var btnInsertUpdate = document.getElementById("submit");
+            btnInsertUpdate.value = "Update";  
+        }
+
+        function sendToPhp()
+        {
+            var JsonData = JSON.stringify(data);
+            console.log(JsonData);
+            var httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = function()
+            {
+                if (this.readyState == 4 && this.status == 200) 
+                {
+                    alert(this.responseText);
+                }
+            };
+            httpRequest.open("GET", "MyData.php?data=" + JsonData, true);
+            httpRequest.send();
+        }
+
+        function search(txtSearch)
+        {
+            var tmp = [];
+
+            for(var i = 0;i<data.length; i++)
+            {
+                if(data[i].Name.includes(txtSearch))
+                {
+                    tmp.push(data[i]);
+                }
+            }
+
+            Display_Data();
+        }
+    </script>
+</body>
+
+</html>
